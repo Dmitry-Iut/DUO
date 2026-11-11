@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#2b1608">
+<title>Дуэль на закате</title>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head><body>
+<canvas id="c"></canvas>
+
+<div id="menu" class="scr on">
+ <h1>ДУЭЛЬ</h1>
+ <div class="sub">Два пистолета. Два телефона.<br>Угадай, куда целится соперник.</div>
+ <button class="btn" id="create">СОЗДАТЬ КОМНАТУ</button>
+ <div class="sub">или войти по коду</div>
+ <div class="row"><input id="code" maxlength="4" placeholder="КОД" autocapitalize="characters" autocomplete="off" autocorrect="off"><button class="btn alt" id="join" style="min-width:0">ВОЙТИ</button></div>
+ <button class="lnk" id="rb">Как играть</button>
+ <div id="note"></div>
+</div>
+<div id="lobby" class="scr">
+ <div class="sub">Код комнаты</div><div id="rc">----</div>
+ <button class="btn" id="share">ПОДЕЛИТЬСЯ ССЫЛКОЙ</button>
+ <div class="sub">Ждём второго игрока.<br>Он открывает ту же ссылку и вводит код.</div>
+ <button class="btn alt" id="cancel">ОТМЕНА</button>
+</div>
+<div id="rules" class="scr">
+ <h1 style="font-size:40px">ПРАВИЛА</h1>
+ <ol>
+  <li>Отсчёт случайный: числа идут вперемешку, в конце «1» и «ОГОНЬ!».</li>
+  <li>Выбирай клетку прицела (3×3 внизу слева). Соперник её не видит.</li>
+  <li>После «ОГОНЬ!» жми красную кнопку. Попадание — если твоя клетка совпала с клеткой соперника.</li>
+  <li>Выстрелили почти вместе (до 0,3 с) и клетки совпали — победили оба. Не совпали — оба промахнулись.</li>
+  <li>Выстрелил первым и попал — ты победил. Промахнулся — патронов нет: уклоняйся, меняй клетку. Соперник видит её сверху и может тебя добить.</li>
+  <li>Никто не стреляет — новый отсчёт.</li>
+ </ol>
+ <button class="btn" id="rclose" style="align-self:center">ПОНЯТНО</button>
+</div>
+
+<div id="game">
+ <div id="red"></div><div id="flash"></div>
+ <div id="top">
+  <div class="chip" id="ping">—</div>
+  <div class="chip" id="score"><div><small>ТЫ</small><b id="s0">0</b></div><span id="am">●</span>:<span id="ao">●</span><div><small>ОН</small><b id="s1">0</b></div></div>
+  <div style="display:flex;gap:6px"><button class="ic" id="mute">🔊</button><button class="ic" id="exit">✕</button></div>
+ </div>
+ <div id="og"></div>
+ <div id="big"></div><div id="xh"></div><div id="msg"></div>
+ <div id="banner"><h2 id="bt"></h2><div id="bs"></div></div>
+ <div id="controls"><div id="pad"></div><button id="fire">ЖДИ</button></div>
+</div>
+<div id="rot" class="scr on" style="display:none"><h1 style="font-size:34px">Поверни телефон вертикально</h1></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/state.js"></script>
+<script src="js/client.js"></script>
+<script src="js/host.js"></script>
+<script src="js/net.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/main.js"></script>
+</body></html>
