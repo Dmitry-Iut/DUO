@@ -1,65 +1,123 @@
-<!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#2b1608">
-<title>Дуэль на закате</title>
-<link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head><body>
-<canvas id="c"></canvas>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#2b1608" />
+    <title>ДУЭЛЬ</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <canvas id="c"></canvas>
 
-<div id="menu" class="scr on">
- <h1>ДУЭЛЬ</h1>
- <div class="sub">Дуэль на пистолетах.<br>Три сердца, мало патронов, один победитель.</div>
- <button class="btn" id="create">СОЗДАТЬ КОМНАТУ</button>
- <div class="sub">или войти по коду</div>
- <div class="row"><input id="code" maxlength="4" placeholder="КОД" autocapitalize="characters" autocomplete="off" autocorrect="off"><button class="btn alt" id="join" style="min-width:0">ВОЙТИ</button></div>
- <button class="lnk" id="rb">Как играть</button>
- <div id="note"></div>
-</div>
-<div id="lobby" class="scr">
- <div class="sub">Код комнаты</div><div id="rc">----</div>
- <button class="btn" id="share">ПОДЕЛИТЬСЯ ССЫЛКОЙ</button>
- <div class="sub">Ждём второго игрока.<br>Он открывает ту же ссылку и вводит код.</div>
- <button class="btn alt" id="cancel">ОТМЕНА</button>
-</div>
-<div id="rules" class="scr">
- <h1 style="font-size:40px">ПРАВИЛА</h1>
- <ol>
-  <li>Двигайся: коснись левой половины экрана и веди пальцем — появится джойстик.</li>
-  <li>Крути камеру и целься: свайп по правой половине. Красная кнопка — выстрел (можно держать).</li>
-  <li>У каждого 3 сердца. Попадание отнимает одно, без сердец — проигрыш раунда.</li>
-  <li>Патроны ограничены: 6 в начале. Золотые ящики 🔸 разбросаны по карте и появляются снова через 12 секунд.</li>
-  <li>Пули не пробивают ящики и стены — прячься за ними.</li>
- </ol>
- <button class="btn" id="rclose" style="align-self:center">ПОНЯТНО</button>
-</div>
+    <div id="menu" class="scr on">
+      <h1>ДУЭЛЬ</h1>
+      <div class="sub">
+        Дуэль на пистолетах.<br />Три сердца, мало патронов, один победитель.
+      </div>
+      <button class="btn" id="create">СОЗДАТЬ КОМНАТУ</button>
+      <div class="sub">или войти по коду</div>
+      <div class="row">
+        <input
+          id="code"
+          maxlength="4"
+          placeholder="КОД"
+          autocapitalize="characters"
+          autocomplete="off"
+          autocorrect="off"
+        /><button class="btn alt" id="join" style="min-width: 0">ВОЙТИ</button>
+      </div>
+      <button class="lnk" id="rb">Как играть</button>
+      <div id="note"></div>
+    </div>
+    <div id="lobby" class="scr">
+      <div class="sub">Код комнаты</div>
+      <div id="rc">----</div>
+      <button class="btn" id="share">ПОДЕЛИТЬСЯ ССЫЛКОЙ</button>
+      <div class="sub">
+        Ждём второго игрока.<br />Он открывает ту же ссылку и вводит код.
+      </div>
+      <button class="btn alt" id="cancel">ОТМЕНА</button>
+    </div>
+    <div id="rules" class="scr">
+      <h1 style="font-size: 40px">ПРАВИЛА</h1>
+      <ol>
+        <li>
+          Двигайся: коснись левой половины экрана и веди пальцем — появится
+          джойстик.
+        </li>
+        <li>
+          Крути камеру и целься: свайп по правой половине. Красная кнопка —
+          выстрел (можно держать).
+        </li>
+        <li>
+          У каждого 3 сердца. Попадание отнимает одно, без сердец — проигрыш
+          раунда.
+        </li>
+        <li>
+          Патроны ограничены: 6 в начале. Золотые ящики 🔸 разбросаны по карте и
+          появляются снова через 12 секунд.
+        </li>
+        <li>Пули не пробивают ящики и стены — прячься за ними.</li>
+      </ol>
+      <button class="btn" id="rclose" style="align-self: center">
+        ПОНЯТНО
+      </button>
+    </div>
 
-<div id="game">
- <div id="red"></div><div id="flash"></div>
- <div id="top">
-  <div class="chip" id="ping">—</div>
-  <div class="chip" id="score"><div><small>ТЫ</small><span id="hp0"></span></div><b id="s0">0</b>:<b id="s1">0</b><div><small>ОН</small><span id="hp1"></span></div></div>
-  <div style="display:flex;gap:6px"><button class="ic" id="mute">🔊</button><button class="ic" id="exit">✕</button></div>
- </div>
- <div id="big"></div><div id="xh"></div><div id="msg"></div>
- <div id="banner"><h2 id="bt"></h2><div id="bs"></div></div>
- <div id="joy"><div id="knob"></div></div>
- <div id="ammo"></div>
- <button id="fire">🔫</button>
-</div>
-<div id="rot" class="scr on" style="display:none"><h1 style="font-size:34px">Поверни телефон вертикально</h1></div>
+    <div id="game">
+      <div id="red"></div>
+      <div id="flash"></div>
+      <div id="top">
+        <div class="chip" id="ping">—</div>
+        <div class="chip" id="score">
+          <div><small>ТЫ</small><span id="hp0"></span></div>
+          <b id="s0">0</b>:<b id="s1">0</b>
+          <div><small>ОН</small><span id="hp1"></span></div>
+        </div>
+        <div style="display: flex; gap: 6px">
+          <button class="ic" id="mute">🔊</button
+          ><button class="ic" id="exit">✕</button>
+        </div>
+      </div>
+      <div id="big"></div>
+      <div id="xh"></div>
+      <div id="msg"></div>
+      <div id="banner">
+        <h2 id="bt"></h2>
+        <div id="bs"></div>
+      </div>
+      <div id="joy"><div id="knob"></div></div>
+      <div id="ammo"></div>
+      <button id="fire">🔫</button>
+    </div>
+    <div id="rot" class="scr on" style="display: none">
+      <h1 style="font-size: 34px">Поверни телефон вертикально</h1>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/scene.js"></script>
-<script src="js/world.js"></script>
-<script src="js/state.js"></script>
-<script src="js/client.js"></script>
-<script src="js/net.js"></script>
-<script src="js/menu.js"></script>
-<script src="js/main.js"></script>
-</body></html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/scene.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/client.js"></script>
+    <script src="js/net.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
