@@ -2,14 +2,11 @@
 function onData(m){switch(m.t){
  case'p':send({t:'q',s:m.s});break;
  case'q':{rtts.push(performance.now()-m.s);if(rtts.length>6)rtts.shift();rtt=[...rtts].sort((a,b)=>a-b)[rtts.length>>1];$('ping').textContent=Math.round(rtt)+' мс';break}
- case'start':beginMatch();break;case'round':cRound();break;case'tick':cTick(m.n);break;case'go':cGo();break;
- case'aim':hostAim(1,m.c);break;case'oaim':oppAim(m.c);break;
- case'shoot':hostShoot(1,m.rt+Math.min(rtt,600)/2,m.a);break;
- case'miss':cMiss(m);break;case'res':cRes(m);break}}
-function setupConn(){conn.on('open',()=>{const ping=()=>send({t:'p',s:performance.now()});ping();G.pi=setInterval(ping,1500);clearTimeout(G.jt);if(role==='host')hostStart()});
+ case'start':beginMatch();break;case's':onState(m);break;case'f':onFire(m);break;case'h':onHit(m);break;case'k':onPick(m.i);break;case'd':onOppDead();break}}
+function setupConn(){conn.on('open',()=>{const ping=()=>send({t:'p',s:performance.now()});ping();G.pi=setInterval(ping,1500);clearTimeout(G.jt);if(role==='host'){send({t:'start'});beginMatch()}});
  conn.on('data',onData);conn.on('close',gone);conn.on('error',gone)}
 const gone=()=>{if(G.phase!=='menu')leave('Соперник отключился')};
-function leave(t){const was=G.phase;G.phase='menu';clearT();H={};clearInterval(G.pi);clearTimeout(G.jt);try{conn&&conn.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}conn=peer=null;rtts=[];show('menu');$('note').textContent=t||''}
+function leave(t){const was=G.phase;G.phase='menu';clearTimeout(G.rt);clearInterval(G.pi);clearTimeout(G.jt);try{conn&&conn.close()}catch(e){}try{peer&&peer.destroy()}catch(e){}conn=peer=null;rtts=[];show('menu');$('note').textContent=t||''}
 function genCode(){const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<4;i++)s+=a[Math.random()*a.length|0];return s}
 let code='';
 function host(n){code=genCode();peer=new Peer(PFX+code);

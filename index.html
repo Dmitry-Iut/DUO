@@ -11,7 +11,7 @@
 
 <div id="menu" class="scr on">
  <h1>ДУЭЛЬ</h1>
- <div class="sub">Два пистолета. Два телефона.<br>Угадай, куда целится соперник.</div>
+ <div class="sub">Дуэль на пистолетах.<br>Три сердца, мало патронов, один победитель.</div>
  <button class="btn" id="create">СОЗДАТЬ КОМНАТУ</button>
  <div class="sub">или войти по коду</div>
  <div class="row"><input id="code" maxlength="4" placeholder="КОД" autocapitalize="characters" autocomplete="off" autocorrect="off"><button class="btn alt" id="join" style="min-width:0">ВОЙТИ</button></div>
@@ -27,12 +27,11 @@
 <div id="rules" class="scr">
  <h1 style="font-size:40px">ПРАВИЛА</h1>
  <ol>
-  <li>Отсчёт случайный: числа идут вперемешку, в конце «1» и «ОГОНЬ!».</li>
-  <li>Выбирай клетку прицела (3×3 внизу слева). Соперник её не видит.</li>
-  <li>После «ОГОНЬ!» жми красную кнопку. Попадание — если твоя клетка совпала с клеткой соперника.</li>
-  <li>Выстрелили почти вместе (до 0,3 с) и клетки совпали — победили оба. Не совпали — оба промахнулись.</li>
-  <li>Выстрелил первым и попал — ты победил. Промахнулся — патронов нет: уклоняйся, меняй клетку. Соперник видит её сверху и может тебя добить.</li>
-  <li>Никто не стреляет — новый отсчёт.</li>
+  <li>Двигайся: коснись левой половины экрана и веди пальцем — появится джойстик.</li>
+  <li>Крути камеру и целься: свайп по правой половине. Красная кнопка — выстрел (можно держать).</li>
+  <li>У каждого 3 сердца. Попадание отнимает одно, без сердец — проигрыш раунда.</li>
+  <li>Патроны ограничены: 6 в начале. Золотые ящики 🔸 разбросаны по карте и появляются снова через 12 секунд.</li>
+  <li>Пули не пробивают ящики и стены — прячься за ними.</li>
  </ol>
  <button class="btn" id="rclose" style="align-self:center">ПОНЯТНО</button>
 </div>
@@ -41,13 +40,14 @@
  <div id="red"></div><div id="flash"></div>
  <div id="top">
   <div class="chip" id="ping">—</div>
-  <div class="chip" id="score"><div><small>ТЫ</small><b id="s0">0</b></div><span id="am">●</span>:<span id="ao">●</span><div><small>ОН</small><b id="s1">0</b></div></div>
+  <div class="chip" id="score"><div><small>ТЫ</small><span id="hp0"></span></div><b id="s0">0</b>:<b id="s1">0</b><div><small>ОН</small><span id="hp1"></span></div></div>
   <div style="display:flex;gap:6px"><button class="ic" id="mute">🔊</button><button class="ic" id="exit">✕</button></div>
  </div>
- <div id="og"></div>
  <div id="big"></div><div id="xh"></div><div id="msg"></div>
  <div id="banner"><h2 id="bt"></h2><div id="bs"></div></div>
- <div id="controls"><div id="pad"></div><button id="fire">ЖДИ</button></div>
+ <div id="joy"><div id="knob"></div></div>
+ <div id="ammo"></div>
+ <button id="fire">🔫</button>
 </div>
 <div id="rot" class="scr on" style="display:none"><h1 style="font-size:34px">Поверни телефон вертикально</h1></div>
 
@@ -56,9 +56,9 @@
 <script src="js/config.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/scene.js"></script>
+<script src="js/world.js"></script>
 <script src="js/state.js"></script>
 <script src="js/client.js"></script>
-<script src="js/host.js"></script>
 <script src="js/net.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/main.js"></script>

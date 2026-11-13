@@ -14,12 +14,7 @@ const fl=new THREE.PointLight(0xffc060,0,14);sc.add(fl);
  const st=new THREE.Mesh(new THREE.PlaneGeometry(7,120),M(0xb37a44));st.rotation.x=-Math.PI/2;st.position.set(0,.01,-40);sc.add(st)}
 const tm=M(0x6b3f1f),cm=M(0x3f7a3a);
 function cactus(x,z,s){const g=new THREE.Group();bx(.35,2,.35,cm,0,1,0,g);bx(.7,.2,.2,cm,.4,1.1,0,g);bx(.2,.7,.2,cm,.7,1.4,0,g);bx(.7,.2,.2,cm,-.4,.8,0,g);bx(.2,.6,.2,cm,-.7,1.05,0,g);g.position.set(x,0,z);g.scale.setScalar(s);sc.add(g)}
-[[-4,-3],[5,-5],[-6,-12],[7,-14],[-3,-22],[4,-26],[10,-8],[-10,-6]].forEach(a=>cactus(a[0],a[1],R(.8,1.4)));
-function house(x,z,c,w){bx(w,3.6,5,M(c),x,1.8,z);bx(w+.6,.4,5.6,tm,x,3.8,z);bx(w,.2,1.6,tm,x,.1,z+3)}
-house(-8,-12,0x8b5a2b,6);house(8.5,-15,0x9c6b3a,5);house(-9,-26,0x7a4b26,7);house(9,-30,0x8b5a2b,6);
 [[-60,-120,30,20],[50,-140,40,28],[0,-170,50,16],[-110,-150,40,24]].forEach(a=>bx(a[2],a[3],20,M(0xb5532e),a[0],a[3]/2,a[1]));
-bx(.8,.9,.8,tm,-2.6,.45,-4);bx(.8,.9,.8,tm,2.8,.45,-8);bx(1,.7,1,tm,-3,.35,-9);
-const tw=new THREE.Mesh(new THREE.IcosahedronGeometry(.4,0),new THREE.MeshBasicMaterial({color:0x8a6a3a,wireframe:true}));tw.position.set(-8,.4,-3);sc.add(tw);
 const dp=new Float32Array(300);for(let i=0;i<300;i+=3){dp[i]=R(-12,12);dp[i+1]=R(.2,4);dp[i+2]=R(-14,2)}
 const dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.BufferAttribute(dp,3));sc.add(new THREE.Points(dg,new THREE.PointsMaterial({color:0xffe2b0,size:.07,transparent:true,opacity:.6})));
 
@@ -46,3 +41,5 @@ function puff(p,col,s){const m=new THREE.Mesh(new THREE.SphereGeometry(.25*s,8,8
 function boom(p){fl.position.copy(p);fa=1;puff(p,0xffd060,.6)}
 function missPt(c,r,toMe){const x=c==1?(Math.random()<.5?-1:1)*.9:(c-1)*1.4,y=r==0?2.6:r==2?.05:1.3;return toMe?V3(x*.6,y*.7+.3,0):V3(x,y,-6.7)}
 function resetFx(){oppDead=0;meDead=0;opp.rotation.x=0;OU.hat.position.copy(OU.h0);OU.hat.rotation.set(0,0,0);hatV.set(0,0,0);$('red').classList.remove('on')}
+
+[[-26,-10],[26,-5],[-27,12],[25,15],[-24,-28],[8,-26],[-9,27],[27,-24]].forEach(a=>cactus(a[0],a[1],R(.9,1.5)));

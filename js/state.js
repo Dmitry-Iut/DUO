@@ -1,15 +1,9 @@
 'use strict';
-let peer,conn,role,H={},rtts=[],rtt=80;
-const G={me:0,phase:'menu',aim:4,ammo:1,oppAmmo:1,fired:false,missed:null,goAt:0,scores:[0,0],rev:[0,0]};
+let peer,conn,role,rtts=[],rtt=80;
+const G={me:0,phase:'menu',s:[0,0],rt:0};
+const P={x:0,z:16,yaw:0,pit:0,hp:HP,ammo:AMMO0,cd:0,dead:false},O={x:0,z:-16,tx:0,tz:0,yaw:0,ty:0,hp:HP,dead:false};
 const send=m=>{try{conn&&conn.open&&conn.send(m)}catch(e){}};
 const big=t=>{const b=$('big');b.textContent=t;b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')},msg=t=>$('msg').textContent=t;
 function show(id){['menu','lobby','game','rules'].forEach(x=>$(x).classList.toggle('on',x===id))}
-function ui(){const can=(G.phase==='live'&&!G.fired)||(G.phase==='dodge'&&G.missed===1-G.me&&!G.fired),f=$('fire');
- f.className=can?'ready':G.phase==='count'?'':'off';f.textContent=can?'ОГОНЬ!':G.phase==='count'?'ЖДИ':'—';
- [...$('pad').children].forEach((c,i)=>c.classList.toggle('on',i===G.aim));
- const s=Math.min(innerWidth*.16,74);$('xh').style.transform=`translate(calc(-50% + ${(G.aim%3-1)*s}px),calc(-50% + ${((G.aim/3|0)-1)*s*.8}px))`;
- $('am').textContent=G.ammo?'●':'○';$('ao').textContent=G.oppAmmo?'●':'○';$('s0').textContent=G.scores[G.me];$('s1').textContent=G.scores[1-G.me];
- $('og').style.display=G.phase==='dodge'?'grid':'none'}
-const GL=['↖','↑','↗','←','●','→','↙','↓','↘'];
-for(let i=0;i<9;i++){const b=document.createElement('button');b.textContent=GL[i];b.addEventListener('pointerdown',e=>{e.preventDefault();setAim(i)});$('pad').appendChild(b);$('og').appendChild(document.createElement('i'))}
-const oppAim=c=>[...$('og').children].forEach((e,i)=>e.classList.toggle('on',i===c));
+const hearts=n=>'❤'.repeat(Math.max(n,0))+'♡'.repeat(HP-Math.max(n,0));
+function ui(){$('hp0').textContent=hearts(P.hp);$('hp1').textContent=hearts(O.hp);$('s0').textContent=G.s[0];$('s1').textContent=G.s[1];$('ammo').textContent='🔸 '+P.ammo+' / '+AMMOMAX}

@@ -48,3 +48,13 @@ button.ic{background:rgba(30,14,4,.7);border:1px solid rgba(255,210,140,.35);col
 #flash{inset:0;background:#fff;opacity:0;pointer-events:none}
 #rot{display:none;background:#1a0d05;z-index:50}
 @media (orientation:landscape) and (max-height:500px){#rot{display:flex}}
+
+#game{position:fixed;inset:0}
+#xh{top:50%;left:50%;transform:translate(-50%,-50%);transition:none;width:30px;height:30px;border-width:2px}
+#xh.hit{border-color:#fff;transform:translate(-50%,-50%) scale(1.6)}
+#msg{bottom:calc(env(safe-area-inset-bottom) + 38px)}
+#joy{display:none;position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:3px solid rgba(255,210,140,.5);background:rgba(30,14,4,.35);pointer-events:none}
+#knob{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px;border-radius:50%;background:rgba(255,210,140,.75)}
+#fire{right:18px;bottom:calc(env(safe-area-inset-bottom) + 70px);width:100px;height:100px;font-size:40px;background:radial-gradient(#ff7a4a,#b5260c)}
+#ammo{left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 8px);text-align:center;font:700 18px Oswald;text-shadow:0 2px 6px #000;pointer-events:none}
+#hp0,#hp1{font-size:15px;letter-spacing:2px;display:block}
